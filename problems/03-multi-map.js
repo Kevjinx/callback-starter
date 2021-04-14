@@ -22,7 +22,6 @@ console.log(result3); // hi!!!!!
 *******************************************************************************/
 
 let multiMap = function(el, n, cb) {
-  let result
   for (let i = 0; i < n; i++) {
     el = cb(el);
   }
