@@ -31,14 +31,47 @@ console.log(
 // [ 'art', 'app', 'buttery' ]
 *******************************************************************************/
 
-let xorSelect = function() {
+const xorSelect = (arr, cb1, cb2) => {
+  //loop through arr, pass element into both cb, if either returned result is true, then return ele
+  let resultArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    const element = arr[i];
+    let cb1TF = cb1(element)
+    let cb2TF = cb2(element)
+    if ( (cb1TF || cb2TF) && !(cb2TF && cb1TF) ) {
+      resultArr.push(element)
+    }
+  }
+  return resultArr;
+}
 
+
+
+
+let isEven = function(n) {
+  return n % 2 === 0;
 };
 
+let isPositive = function(n) {
+  return n > 0;
+};
+
+console.log(xorSelect([-2, -1, 1, 2, 3, 4], isEven, isPositive));
+// [ -2, 1, 3 ]
 
 
+let longString = function(s) {
+  return s.length > 4;
+};
 
+let startsA = function(s) {
+  return s[0] === "a";
+};
 
+console.log(
+  xorSelect(["art", "academy", "app", "cat", "buttery"], longString, startsA)
+);
+// [ 'art', 'app', 'buttery' ]
 
 /*****************DO NOT MODIFY ANYTHING UNDER THIS  LINE**********************/
 module.exports = xorSelect;

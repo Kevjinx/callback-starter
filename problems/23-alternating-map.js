@@ -36,10 +36,41 @@ console.log(alternatingMap(['hEy', 'EVERYone', 'whats', 'uP??'], yell, whisper))
 *******************************************************************************/
 
 
-let alternatingMap = function() {
+const alternatingMap = (arr, cb1, cb2) => {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i];
+    if (i%2 === 0) {
+      result.push(cb1(el))
+    } else {
+      result.push(cb2(el))
+    }
+  }
+  return result;
+}
 
+
+
+let triple = function (n) {
+  return 3 * n;
 };
 
+let half = function (n) {
+  return n / 2;
+};
+console.log(alternatingMap([7, 3, 2, 9, 8], triple, half));
+// [ 21, 1.5, 6, 4.5, 24 ]
+
+
+let yell = function (s) {
+  return s.toUpperCase() + '!';
+};
+
+let whisper = function (s) {
+  return '..' + s.toLowerCase() + '..';
+};
+console.log(alternatingMap(['hEy', 'EVERYone', 'whats', 'uP??'], yell, whisper));
+// [ 'HEY!', '..everyone..', 'WHATS!', '..up??..' ]
 
 
 
